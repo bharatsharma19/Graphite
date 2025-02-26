@@ -1,5 +1,5 @@
 {
-  "name": "Excelidraw",
+  "name": "graphite",
   "private": true,
   "scripts": {
     "build": "turbo run build",
