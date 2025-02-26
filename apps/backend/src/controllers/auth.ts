@@ -3,8 +3,8 @@ import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
-import { JWT_SECRET } from "../config";
 import { prisma } from "@repo/db/client";
+import { JWT_SECRET } from "@repo/common-backend/config";
 
 // Register function
 export const register: RequestHandler = async (req, res): Promise<void> => {
