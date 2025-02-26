@@ -2,19 +2,20 @@
 import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { validationResult } from "express-validator";
 import { prisma } from "@repo/db/client";
 import { JWT_SECRET } from "@repo/common-backend/config";
+import { UserRegisterSchema, UserLoginSchema } from "@repo/common/types";
 
 // Register function
 export const register: RequestHandler = async (req, res): Promise<void> => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
+  // Add Zod Validation
+  const data = UserRegisterSchema.safeParse(req.body);
+  if (!data.success) {
+    res.status(400).json({ errors: data.error.errors });
     return;
   }
 
-  const { name, email, password } = req.body;
+  const { name, email, password } = data.data;
 
   try {
     const user = await prisma.user.findUnique({ where: { email } });
@@ -50,13 +51,14 @@ export const register: RequestHandler = async (req, res): Promise<void> => {
 
 // Login function
 export const login: RequestHandler = async (req, res): Promise<void> => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
+  // Add Zod Validation
+  const data = UserLoginSchema.safeParse(req.body);
+  if (!data.success) {
+    res.status(400).json({ errors: data.error.errors });
     return;
   }
 
-  const { email, password } = req.body;
+  const { email, password } = data.data;
 
   try {
     const user = await prisma.user.findUnique({ where: { email } });
