@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // Importing Routes
-const authRoutes = require("./routes/auth");
+import authRoutes from "./routes/auth";
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Graphite Backend Server");
