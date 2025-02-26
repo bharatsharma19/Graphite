@@ -9,7 +9,10 @@
     "dev": "npm run build && npm run start"
   },
   "dependencies": {
-    "@repo/typescript-config": "*"
+    "@repo/typescript-config": "*",
+    "@types/ws": "^8.5.14",
+    "dotenv": "^16.4.7",
+    "ws": "^8.18.1"
   },
   "keywords": [],
   "author": "",
