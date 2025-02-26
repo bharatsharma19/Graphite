@@ -15,6 +15,8 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
+    "@repo/db": "*",
+    "@repo/common": "*",
     "@repo/common-backend": "*",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/ws": "^8.5.14"
