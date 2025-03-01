@@ -45,7 +45,7 @@ export const register: RequestHandler = async (req, res): Promise<void> => {
     );
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ error: "Server Error" });
   }
 };
 
@@ -88,6 +88,6 @@ export const login: RequestHandler = async (req, res): Promise<void> => {
     );
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ error: "Server Error" });
   }
 };

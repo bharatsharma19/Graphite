@@ -7,28 +7,33 @@ interface AuthRequest extends Request {
   userId?: string;
 }
 
-export function middleware1(
+export function middleware(
   req: AuthRequest,
   res: Response,
   next: NextFunction
-) {
+): void {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+    res.status(401).json({ message: "Unauthorized" });
+    return;
   }
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload; // ✅ Explicitly cast to JwtPayload
 
     if (!decoded || typeof decoded !== "object" || !decoded.userId) {
-      return res.status(401).json({ message: "Unauthorized" });
+      res.status(401).json({ message: "Unauthorized: Invalid Token" });
+      return;
     }
 
-    req.userId = decoded.userId; // ✅ TypeScript will now recognize userId
+    req.userId = decoded.userId as string; // ✅ TypeScript will now recognize userId
 
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized" });
+    res
+      .status(401)
+      .json({ message: "Unauthorized: Token Verification Failed" });
+    return;
   }
 }

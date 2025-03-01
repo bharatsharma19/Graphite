@@ -1,18 +1,14 @@
 // Importing express
 import express from "express";
 
-// Importing middleware
-import { middleware } from "../middlewares/index";
-
 // Importing functions from auth controller
-import { createRoom, getRoom } from "../controllers/room";
+import { getChats } from "../controllers/chat";
 
 // Creating express router
 const router = express.Router();
 
 // Defining routes
-router.get("/:slug", getRoom);
-router.post("/create", middleware, createRoom);
+router.get("/chats/:roomId", getChats);
 
 // Exporting router
 export default router;

@@ -6,6 +6,8 @@ app.use(express.json());
 
 // Importing Routes
 import authRoutes from "./routes/auth";
+import roomRoutes from "./routes/room";
+import chatRoutes from "./routes/chat";
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Graphite Backend Server");
@@ -13,6 +15,8 @@ app.get("/", (req: Request, res: Response) => {
 
 // Using Routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/room", roomRoutes);
+app.use("/api/v1/chat", chatRoutes);
 
 app.listen(PORT, () => {
   console.log(`Backend Server is running on port ${PORT}`);
