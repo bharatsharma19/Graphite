@@ -52,6 +52,24 @@ export const getRoom: RequestHandler = async (req, res): Promise<void> => {
       where: {
         slug,
       },
+      select: {
+        id: true,
+        slug: true,
+        admin: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        chats: {
+          select: {
+            id: true,
+            message: true,
+            userId: true,
+            createdAt: true,
+          },
+        },
+      },
     });
 
     res.status(200).json({ room });

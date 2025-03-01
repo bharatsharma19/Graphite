@@ -16,6 +16,12 @@ export const getChats: RequestHandler = async (req, res): Promise<void> => {
         id: "desc",
       },
       take: 1000,
+      select: {
+        id: true,
+        message: true,
+        userId: true,
+        createdAt: true,
+      },
     });
 
     res.status(200).json({ messages });
